@@ -21,7 +21,6 @@ class ArduinoConnection:
         LOGGER.info('Start converting data...')
         send_bytes = list()
         for job_status in job_statuses:
-            send_bytes.append(job_status['id'])
             if job_status['status'] == 'blue':
                 send_bytes.append(self.BLUE)
             if job_status['status'] == 'blue_anime':
