@@ -1,6 +1,0 @@
-jenkinsapi==0.3.4
-pyserial==3.3
-pytz==2017.2
-requests==2.13.0
-six==1.10.0
-virtualenv==15.0.2

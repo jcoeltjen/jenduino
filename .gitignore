@@ -1,0 +1,5 @@
+.idea/
+jenduino/__pycache__/
+jenduino.egg-info/
+.eggs/
+tests/__pycache__/

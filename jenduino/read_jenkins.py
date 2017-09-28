@@ -9,11 +9,6 @@ logging.basicConfig(format='%(levelname)s: %(message)s', level=logging.INFO)
 config = json.load(open('config.json'))
 jobs = json.load(open('jobs.json'))
 
-BLUE = 0xe0
-BLUE_ANIME = 0xe1
-RED = 0xe2
-RED_ANIME = 0xe3
-DELIMITER = 0xFF
 
 def create_jenkins_object():
     jenkins_config = config['jenkins']
@@ -45,32 +40,6 @@ def write_serial(send_data):
     ser.write(data=send_bytes)
     ser.close()
 
-def convert_data(job_statuses):
-    """Converts the given statues and IDs to raw byte values that can be transferred using the write_serial() function."""
-    logging.info('Start converting data...')
-    send_bytes = list()
-    for job_status in job_statuses:
-        send_bytes.append(job_status['id'])
-        if job_status['status'] == 'blue':
-            send_bytes.append(BLUE)
-        if job_status['status'] == 'blue_anime':
-            send_bytes.append(BLUE_ANIME)
-        if job_status['status'] == 'red':
-            send_bytes.append(RED)
-        if job_status['status'] == 'red_anime':
-            send_bytes.append(RED_ANIME)
-        send_bytes.append(DELIMITER)
-    return send_bytes
 
 
-def main():
-    jenkins = create_jenkins_object()
-    job_statuses = load_job_stati(jenkins=jenkins)
-    logging.info('job stati: {}'.format(job_statuses))
-    send_data = convert_data(job_statuses)
-    logging.info('send data: {}'.format(send_data))
-    write_serial(send_data)
 
-
-if __name__ == '__main__':
-    main()
