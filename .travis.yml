@@ -1,0 +1,10 @@
+language: python
+
+python:
+  - "3.6"
+
+install:
+  - py setup.py install
+
+script:
+  - py setup.py test
